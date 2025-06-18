@@ -19,7 +19,5 @@ yarn-error.log*
 # Environment variables
 .env
 
-# IDE/project settings (optional, but recommended)
+# IDE/project settings
 .vscode/
-.idea/
-*.swp
