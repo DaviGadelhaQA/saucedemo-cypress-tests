@@ -18,6 +18,7 @@ yarn-error.log*
 
 # Environment variables
 .env
+cypress.env.json
 
 # IDE/project settings
 .vscode/
