@@ -5,9 +5,14 @@
   "devDependencies": {
     "cypress": "^14.5.0"
   },
+  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:open": "cypress open",
+    "test": "cypress run",
+    "cy:open:mobile": "cypress open --config viewportWidth=410,viewportHeight=860",
+    "test:mobile": "cypress run --config viewportWidth=410,viewportHeight=860"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
