@@ -1,4 +1,6 @@
-import './commands'
+import './commands';
+import 'cypress-plugin-tab';
+
 
 const app = window.top;
 if(!app.document.head.querySelector("[data-hide-command-log-request]")){
