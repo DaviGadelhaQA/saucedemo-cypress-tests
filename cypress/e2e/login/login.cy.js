@@ -69,7 +69,27 @@ describe("Login Functionality", () => {
     cy.get(loginPage.loginButton).click();
 
     cy.checkLoginError('Epic sadface: Username and password do not match any user in this service');
-  })
+  });
+
+  it('TCF_009 - Should logout with success', () => {
+    cy.login();
+
+    cy.url().should('include', '/inventory.html');
+    cy.get(loginPage.bmMenu).should('be.visible');
+
+    cy.get(loginPage.bmMenu).click();
+    cy.get(loginPage.logoutButton).click();
+
+    cy.url().should('be.equal', 'https://www.saucedemo.com/');
+    cy.get(loginPage.loginButton).should('be.visible');
+
+    cy.window().then((win) => {
+      win.location.href = '/inventory.html';
+    });
+
+    cy.url().should('eq', 'https://www.saucedemo.com/');
+    cy.checkLoginError("sadface: You can only access '/inventory.html' when you are logged in.");
+  });
 
   it('TCUX_001 - Tab navigation between input fields', () => {
     cy.get(loginPage.usernameInput).focus().should('be.focused');
@@ -79,7 +99,7 @@ describe("Login Functionality", () => {
 
     cy.focused().tab();
     cy.get(loginPage.loginButton).should('be.focused');
-  })
+  });
 
   it('TCUX_002 - Password field is hidden', () => {
     cy.get(loginPage.passwordInput)
