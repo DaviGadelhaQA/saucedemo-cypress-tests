@@ -4,6 +4,7 @@ describe("Cart Funcionality", () => {
   beforeEach(() => {
     cy.visit('/');
     cy.login();
+    cy.fixture("products").as('productData');
   });
 
   it('TCF_001 - Should add the Sauce labs backpack to the cart and show badge with 1 item', () => {
@@ -29,5 +30,16 @@ describe("Cart Funcionality", () => {
     cy.goToCart();
     cy.url().should('contain', 'cart.html');
     cy.get(cartPage.cartTitle).should('contain', 'Your Cart');
+  });
+
+  it('TCF_004 - Check cart details on cart page', function () {
+      cy.addProductToCart(cartPage.addBackpack);
+      cy.goToCart();
+
+      cy.get(cartPage.cartItem).should('exist');
+      cy.get(cartPage.itemQuantity).should('contain', '1');
+      cy.get(cartPage.titleProduct).should('contain', this.productData.backpack.name);
+      cy.get(cartPage.itemPrice).should('contain', this.productData.backpack.price);
+      cy.get(cartPage.removeBackpack).should('be.visible');
   });
 });
