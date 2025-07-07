@@ -42,4 +42,11 @@ describe("Cart Funcionality", () => {
       cy.get(cartPage.itemPrice).should('contain', this.productData.backpack.price);
       cy.get(cartPage.removeBackpack).should('be.visible');
   });
+
+  it.only('TC_005 Should navigate to inventory page when clicking "Continue Shopping" button', () => {
+    cy.goToCart();
+    cy.get(cartPage.continueShoppingButtton).click();
+
+    cy.url().should('contain', 'inventory.html')
+  });
 });

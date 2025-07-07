@@ -7,5 +7,6 @@ export const cartPage = {
     cartTitle: '[data-test="title"]',
     itemQuantity: '[data-test="item-quantity"]',
     titleProduct: '[data-test="inventory-item-name"]',
-    itemPrice: '[data-test="inventory-item-price"]'
+    itemPrice: '[data-test="inventory-item-price"]',
+    continueShoppingButtton: '[data-test="continue-shopping"]'
 }
