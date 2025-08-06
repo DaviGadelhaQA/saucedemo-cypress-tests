@@ -7,32 +7,44 @@ describe("Cart Funcionality", () => {
     cy.fixture("products").as('productData');
   });
 
-  it('TCF_001 - Should add the Sauce labs backpack to the cart and show badge with 1 item', () => {
-    cy.addProductToCart(cartPage.addBackpack);
-    cy.get(cartPage.badge).should('contain', '1');
+  describe('Success Scenarios', () => {
+    it('TCF_001 - Add one item to the cart', () => {
+      cy.addProductToCart(cartPage.addBackpack);
+      cy.get(cartPage.badge).should('contain', '1');
+    });
+
+    it('TCF_003 - Access cart page via cart icon', () => {
+      cy.goToCart();
+      cy.url().should('contain', 'cart.html');
+      cy.get(cartPage.cartTitle).should('contain', 'Your Cart');
+    });
+
+    it('TCF_005 - Continue Shopping redirects to inventory', () => {
+      cy.goToCart();
+      cy.get(cartPage.continueShoppingButtton).click();
+
+      cy.url().should('contain', 'inventory.html')
+    });
   });
 
-  it('TCF_002 - Should remove Sauce labs backpack from the cart', () => {
-    cy.addProductToCart(cartPage.addBackpack);
-    
-    cy.goToCart();
+  describe('Alternative Flows', () => {
+    it('TCF_002 - Remove item from cart', () => {
+      cy.addProductToCart(cartPage.addBackpack);
 
-    cy.url().should('contain', 'cart.html');
+      cy.goToCart();
 
-    cy.removeProductFromCart(cartPage.removeBackpack);
+      cy.url().should('contain', 'cart.html');
 
-    cy.get(cartPage.badge).should('not.exist');
+      cy.removeProductFromCart(cartPage.removeBackpack);
 
-    cy.get(cartPage.cartItem).should('not.exist');
+      cy.get(cartPage.badge).should('not.exist');
+
+      cy.get(cartPage.cartItem).should('not.exist');
+    });
   });
 
-  it('TCF_003 - Should access cart page via cart icon', () => {
-    cy.goToCart();
-    cy.url().should('contain', 'cart.html');
-    cy.get(cartPage.cartTitle).should('contain', 'Your Cart');
-  });
-
-  it('TCF_004 - Check cart details on cart page', function () {
+  describe('UX/UI', () => {
+    it('TCUX_001 - Check cart details on cart page', function () {
       cy.addProductToCart(cartPage.addBackpack);
       cy.goToCart();
 
@@ -41,12 +53,6 @@ describe("Cart Funcionality", () => {
       cy.get(cartPage.titleProduct).should('contain', this.productData.backpack.name);
       cy.get(cartPage.itemPrice).should('contain', this.productData.backpack.price);
       cy.get(cartPage.removeBackpack).should('be.visible');
-  });
-
-  it.only('TC_005 Should navigate to inventory page when clicking "Continue Shopping" button', () => {
-    cy.goToCart();
-    cy.get(cartPage.continueShoppingButtton).click();
-
-    cy.url().should('contain', 'inventory.html')
+    });
   });
 });
