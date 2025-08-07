@@ -11,3 +11,15 @@ Cypress.Commands.add('removeProductFromCart', (selector) => {
 Cypress.Commands.add('goToCart', () => {
   cy.get(cartPage.shoppingCart).click();
 });
+
+Cypress.Commands.add('addMultipleItems', (products) => {
+  Object.entries(products).forEach(([key, selector]) => {
+    cy.addProductToCart(selector);
+  });
+});
+
+Cypress.Commands.add('removeMultipleItems', (products) => {
+  Object.entries(products).forEach(([key, selector]) => {
+    cy.removeProductFromCart(selector);
+  });
+});
