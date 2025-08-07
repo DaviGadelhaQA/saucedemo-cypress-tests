@@ -19,11 +19,51 @@ describe("Cart Funcionality", () => {
       cy.get(cartPage.cartTitle).should('contain', 'Your Cart');
     });
 
+    it('TCF_004 - Add multiple items to the cart', () => {
+      const productsToAdd = {
+        backpack: cartPage.addBackpack,
+        bike: cartPage.addBikeLight,
+        T_Shirt: cartPage.addT_Shirt
+      }
+
+      cy.addMultipleItems(productsToAdd);
+
+      cy.get(cartPage.badge).should('contain', Object.keys(productsToAdd).length);
+    });
+
     it('TCF_005 - Continue Shopping redirects to inventory', () => {
       cy.goToCart();
       cy.get(cartPage.continueShoppingButtton).click();
 
       cy.url().should('contain', 'inventory.html')
+    });
+
+    it('TCF_006 - Navigate to Checkout from cart', function() {
+      cy.addProductToCart(cartPage.addBackpack);
+      cy.goToCart();
+
+      cy.get(cartPage.checkoutButton).click();
+      cy.url().should('include', 'checkout')
+    });
+
+    it('TCF_007 - Add and remove multiple items', function () {
+      const productsToAdd = {
+        backpack: cartPage.addBackpack,
+        bike: cartPage.addBikeLight,
+        T_Shirt: cartPage.addT_Shirt
+      }
+
+      const productsToRemove = {
+        backpack: cartPage.removeBackpack,
+        bike: cartPage.removeBikeLight,
+        T_Shirt: cartPage.removeT_Shirt
+      }
+
+      cy.addMultipleItems(productsToAdd);
+      cy.removeMultipleItems(productsToRemove);
+
+      cy.get(cartPage.badge).should('not.exist');
+      cy.get(cartPage.cartItem).should('not.exist');
     });
   });
 

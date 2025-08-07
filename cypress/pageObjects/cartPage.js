@@ -1,12 +1,20 @@
 export const cartPage = {
     addBackpack: '[data-test="add-to-cart-sauce-labs-backpack"]',
+    addBikeLight: '[data-test="add-to-cart-sauce-labs-bike-light"]',
+    addT_Shirt: '[data-test="add-to-cart-sauce-labs-bolt-t-shirt"]',
     badge: '[data-test="shopping-cart-badge"]',
     shoppingCart: '[data-test="shopping-cart-link"]',
     removeBackpack: '[data-test="remove-sauce-labs-backpack"]',
+    removeBikeLight: '[data-test="remove-sauce-labs-bike-light"]',
+    removeT_Shirt: '[data-test="remove-sauce-labs-bolt-t-shirt"]',
     cartItem: '.cart_item',
     cartTitle: '[data-test="title"]',
     itemQuantity: '[data-test="item-quantity"]',
     titleProduct: '[data-test="inventory-item-name"]',
     itemPrice: '[data-test="inventory-item-price"]',
-    continueShoppingButtton: '[data-test="continue-shopping"]'
+    continueShoppingButtton: '[data-test="continue-shopping"]',
+    checkoutButton: '[data-test="checkout"]',
+    firstNameField: '[data-test="firstName"]',
+    lastNameField: '[data-test="lastName"]',
+    cepField: '[data-test="postalCode"]'
 }
