@@ -95,7 +95,7 @@ describe("Cart Funcionality", () => {
       cy.get(cartPage.removeBackpack).should('be.visible');
     });
 
-    it.only('TCUX_002 - Ensure accessibility of cart controls', function () {
+    it('TCUX_002 - Ensure accessibility of cart controls', function () {
       cy.addProductToCart(cartPage.addBackpack);
       cy.goToCart();
 
