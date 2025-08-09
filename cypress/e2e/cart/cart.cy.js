@@ -38,7 +38,7 @@ describe("Cart Funcionality", () => {
       cy.url().should('contain', 'inventory.html')
     });
 
-    it('TCF_006 - Navigate to Checkout from cart', function() {
+    it('TCF_006 - Navigate to Checkout from cart', function () {
       cy.addProductToCart(cartPage.addBackpack);
       cy.goToCart();
 
@@ -93,6 +93,19 @@ describe("Cart Funcionality", () => {
       cy.get(cartPage.titleProduct).should('contain', this.productData.backpack.name);
       cy.get(cartPage.itemPrice).should('contain', this.productData.backpack.price);
       cy.get(cartPage.removeBackpack).should('be.visible');
+    });
+
+    it.only('TCUX_002 - Ensure accessibility of cart controls', function () {
+      cy.addProductToCart(cartPage.addBackpack);
+      cy.goToCart();
+
+      cy.get('[data-test="remove-sauce-labs-backpack"]').focus().should('be.focused');
+      cy.focused().tab();
+      
+      cy.get('[data-test="continue-shopping"]').focus().should('be.focused');
+
+      cy.focused().tab();
+      cy.get('[data-test="checkout"]').should('be.focused');
     });
   });
 });
